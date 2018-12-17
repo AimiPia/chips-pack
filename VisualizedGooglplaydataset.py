@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import nltk
 from nltk.draw.dispersion import dispersion_plot
 
@@ -41,6 +40,18 @@ data.reviews = data.reviews.apply(lambda x : int(x))
 rating = data["rating"]
 category = data["category"]
 
+#%% cleaning google play store review dataset
+print("***********************************")
+print("Google Play Store Review Dataset")
+print(data2.columns)
+print(data2.head())
+
+data2 = data2.dropna(how = "any")   # dropping null data
+data2 = data2.reset_index(drop = True)
+data2.Translated_Review = data2.Translated_Review.str.lower() #making them lower so we can work on it easily
+data2.Sentiment = data2.Sentiment.str.lower() 
+freq = nltk.FreqDist(data2.Translated_Review) 
+
 #%%
 class Googleplaystore:
     #%% how mony app in each category
@@ -49,8 +60,7 @@ class Googleplaystore:
         data.category.value_counts().plot(kind="pie",autopct = "%1.0f%%",pctdistance = 0.9,radius = 1.3,figsize = (12,12))
         plt.ylabel(" ")
         plt.show()    
-    
-    
+
     #%% avarege ratings of categories
     def ratingofcategory():
         print(data.groupby(category).rating.mean().head())
@@ -79,6 +89,7 @@ class Googleplaystore:
         plt.ylabel("reviews")  
         plt.title("Total review of each category")
         plt.show()
+    
     #%% Rating Frequancy
     def ratingfrequency():
         print(data.rating.describe())
@@ -87,19 +98,8 @@ class Googleplaystore:
         plt.xlabel("Ratings")
         plt.ylabel("Rating Counts")
         plt.show()
-                
-        
-#%% cleaning google play store review dataset
-print("***********************************")
-print("Google Play Store Review Dataset")
-print(data2.columns)
-print(data2.head())
+#%%                
 
-data2 = data2.dropna(how = "any")   # dropping null data
-data2 = data2.reset_index(drop = True)
-data2.Translated_Review = data2.Translated_Review.str.lower() #making them lower so we can work on it easily
-data2.Sentiment = data2.Sentiment.str.lower() 
-freq = nltk.FreqDist(data2.Translated_Review) 
 
 class Googleplayreview:
     #%% most common list with plot 
@@ -122,4 +122,4 @@ class Googleplayreview:
         print(data2[data2["App"].str.contains("Facebook")])
         facebook_data = data2[data2["App"].str.contains("Facebook")]
         facebook_data.Sentiment.value_counts().plot(kind="pie",autopct = "%1.0f%%",pctdistance = 0.9,radius = 1.2,figsize = (10,10))
-
+#%%
