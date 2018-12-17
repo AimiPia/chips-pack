@@ -123,3 +123,14 @@ class Googleplayreview:
         facebook_data = data2[data2["App"].str.contains("Facebook")]
         facebook_data.Sentiment.value_counts().plot(kind="pie",autopct = "%1.0f%%",pctdistance = 0.9,radius = 1.2,figsize = (10,10))
 #%%
+Googleplaystore.appincategory()
+#Googleplaystore.ratingofcategory()
+#Googleplaystore.priceofcategory()
+#Googleplaystore.totalreviewofapps()
+#Googleplaystore.totalreviewofcat()
+#Googleplaystore.ratingfrequency()
+
+#Googleplayreview.mostcommonlist()
+#Googleplayreview.wordhomogenity()
+#Googleplayreview.valueofsentiments()
+#Googleplayreview.facebookapps()
