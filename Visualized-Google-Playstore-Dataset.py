@@ -93,7 +93,7 @@ class Googleplaystore:
     #%% Rating Frequancy
     def ratingfrequency():
         print(data.rating.describe())
-        data.groupby("rating").rating.value_counts().plot(kind = "bar")
+        data.rating.value_counts().plot(kind = "bar")
         plt.title("Rating Frequency")
         plt.xlabel("Ratings")
         plt.ylabel("Rating Counts")
